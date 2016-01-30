@@ -24,13 +24,13 @@ class PyTest(TestCommand):
 
 
 setup(
-    name='zerofs',
+    name='easyfs',
     version='0.1.0',
 
     author='Alexandre Andrade',
     author_email='kaniabi@gmail.com',
 
-    url='https://github.com/zerotk/zerofs',
+    url='https://github.com/zerotk/easyfs',
 
     description = 'File system utilities for python.',
     long_description = '''File system utilities for python.''',

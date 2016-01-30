@@ -1,0 +1,20 @@
+Novas conex‰es ser∆o lembradas.
+
+
+Status       Local     Remoto                    Rede
+
+-------------------------------------------------------------------------------
+OK           H:        \\br\CXMR 
+                                                Microsoft Windows Network
+             O:        \\dfscientifico\Cientifico 
+                                                Microsoft Windows Network
+             P:        \\Organograma\SISTEMAS 
+                                                Microsoft Windows Network
+             R:        \\CENPES\CENPES_PDGP_SAR 
+                                                Microsoft Windows Network
+OK           U:        \\biz\CXMR 
+                                                Microsoft Windows Network
+             V:        \\uo-rio\organograma 
+                                                Microsoft Windows Network
+Comando conclu°do com àxito.
+
