@@ -65,7 +65,7 @@ setup(
         'reraiseit',
     ],
     tests_require=[
-        'pytest>=2.8',
+        'pytest',
         'coverage',
     ],
     cmdclass={'test': PyTest},
