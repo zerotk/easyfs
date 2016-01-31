@@ -1485,7 +1485,6 @@ def CreateLink(target_path, link_path, override=True):
             dw_flags = 0
             if target_path and os.path.isdir(target_path):
                 dw_flags = 1
-            print '\n>>>', link_path, '->', target_path, dw_flags
             return CreateSymbolicLink(target_path, link_path, dw_flags)
         except Exception as e:
             reraise(e, 'Creating link "%(link_path)s" pointing to "%(target_path)s"' % locals())
