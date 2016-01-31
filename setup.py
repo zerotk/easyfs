@@ -61,7 +61,11 @@ setup(
 
     install_requires=[
         'six',
-        # DEVELOPMENT
+        'jacaro.windows',
+        'reraiseit',
+    ],
+    tests_require=[
+        'pytest>=2.8',
         'coverage',
     ],
     cmdclass={'test': PyTest},
