@@ -1,5 +1,2 @@
 six
-jacaro.windows
-
-# Development
-pytest
+jaraco.windows

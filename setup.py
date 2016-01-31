@@ -61,7 +61,7 @@ setup(
 
     install_requires=[
         'six',
-        'jacaro.windows',
+        'jaraco.windows',
         'reraiseit',
     ],
     tests_require=[
