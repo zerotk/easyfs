@@ -19,7 +19,7 @@ class PyTest(TestCommand):
 
     def run_tests(self):
         import pytest
-        errno = pytest.main(['reraiseit'] + self.pytest_args)
+        errno = pytest.main(['easyfs'] + self.pytest_args)
         sys.exit(errno)
 
 
