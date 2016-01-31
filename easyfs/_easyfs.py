@@ -5,15 +5,6 @@ This module contains a selection of file related functions that can be used anyw
 Some sort of wrapper for common builtin 'os' operations with a nicer interface.
 
 These functions abstract file location, most of them work for either local, ftp or http protocols
-
-
-#===================================================================================================
-# FTP LIMITATIONS:
-#===================================================================================================
-    Right now, all functions that require a FTP connection are ALWAYS creating and closing a FTP
-    Host.
-
-    Keep in mind that this process can be slow if you perform many of such operations in sequence.
 '''
 from reraiseit import reraise
 import contextlib
@@ -210,8 +201,6 @@ def CreateMD5(source_filename, target_filename=None):
 
         If None, defaults to source_filename + '.md5'
     '''
-    from ben10.foundation.hash import Md5Hex
-
     if target_filename is None:
         target_filename = source_filename + '.md5'
 
@@ -272,7 +261,7 @@ def CopyFile(source_filename, target_filename, override=True, md5_check=False, c
 
     .. seealso:: FTP LIMITATIONS at this module's doc for performance issues information
     '''
-    from ben10.filesystem import FileNotFoundError
+    from ._exceptions import FileNotFoundError
 
     # Check override
     if not override and Exists(target_filename):
@@ -562,9 +551,9 @@ def IsFile(path):
 
     elif url.scheme == 'ftp':
         from ._exceptions import NotImplementedProtocol
-        raise NotImplementedProtocol(target_url.scheme)
+        raise NotImplementedProtocol(url.scheme)
     else:
-        from ben10.filesystem import NotImplementedProtocol
+        from ._exceptions import NotImplementedProtocol
         raise NotImplementedProtocol(url.scheme)
 
 
@@ -1233,7 +1222,6 @@ class CreateTemporaryDirectory(object):
         existing_files = set(ListFiles(self.base_dir))
 
         # If a base dir was given, let us generate a unique directory name there and use it
-        from ben10.foundation.hash import IterHashes
         for random_component in IterHashes(iterator_size=self.maximum_attempts):
             candidate_name = '%stemp_dir_%s%s' % (self.prefix, random_component, self.suffix)
             candidate_path = os.path.join(self.base_dir, candidate_name)
@@ -1446,13 +1434,13 @@ def ListMappedNetworkDrives():
 #===================================================================================================
 def DeleteLink(path):
     if sys.platform != 'win32':
-            os.unlink(path)
+        os.unlink(path)
     else:
-        import win32file
+        import _easyfs_win32
         if IsDir(path):
-            win32file.RemoveDirectory(path)
+            _easyfs_win32.RemoveDirectory(path)
         else:
-            win32file.DeleteFile(path)
+            _easyfs_win32.DeleteFile(path)
 
 
 
@@ -1486,9 +1474,19 @@ def CreateLink(target_path, link_path, override=True):
     if sys.platform != 'win32':
         return os.symlink(target_path, link_path)  # @UndefinedVariable
     else:
-        from ntfsutils import junction
+        #import ntfsutils.junction
+        #return ntfsutils.junction.create(target_path, link_path)
+
+        import jaraco.windows.filesystem
+        return jaraco.windows.filesystem.symlink(target_path, link_path)
+
+        from ._easyfs_win32 import CreateSymbolicLink
         try:
-            return junction.create(target_path, link_path)
+            dw_flags = 0
+            if target_path and os.path.isdir(target_path):
+                dw_flags = 1
+            print '\n>>>', link_path, '->', target_path, dw_flags
+            return CreateSymbolicLink(target_path, link_path, dw_flags)
         except Exception as e:
             reraise(e, 'Creating link "%(link_path)s" pointing to "%(target_path)s"' % locals())
 
@@ -1510,9 +1508,8 @@ def IsLink(path):
     if sys.platform != 'win32':
         return os.path.islink(path)
 
-    # Code taken from http://stackoverflow.com/a/7924557/1209622
-    from ntfsutils import junction
-    return junction.isjunction(path)
+    import jaraco.windows.filesystem
+    return jaraco.windows.filesystem.islink(path)
 
 
 
@@ -1534,9 +1531,15 @@ def ReadLink(path):
     if sys.platform != 'win32':
         return os.readlink(path)  # @UndefinedVariable
 
-    from ntfsutils import junction
-    return junction.readlink(path)
+    if not IsLink(path):
+        from ._exceptions import FileNotFoundError
+        raise FileNotFoundError(path)
 
+    import jaraco.windows.filesystem
+    result = jaraco.windows.filesystem.readlink(path)
+    if '\\??\\' in result:
+        result = result.split('\\??\\')[1]
+    return result
 
 
 #===================================================================================================
