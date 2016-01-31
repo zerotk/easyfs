@@ -34,6 +34,7 @@ def _GetNativeEolStyle(platform=sys.platform):
     _NATIVE_EOL_STYLE_MAP = {
         'win32' : EOL_STYLE_WINDOWS,
         'linux2' : EOL_STYLE_UNIX,
+        'linux' : EOL_STYLE_UNIX,
         'darwin' : EOL_STYLE_MAC,
     }
     result = _NATIVE_EOL_STYLE_MAP.get(platform)
