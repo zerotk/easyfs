@@ -32,8 +32,8 @@ setup(
 
     url='https://github.com/zerotk/easyfs',
 
-    description = 'File system utilities for python.',
-    long_description = '''File system utilities for python.''',
+    description='File system utilities for python.',
+    long_description='''File system utilities for python.''',
 
     classifiers=[
         # How mature is this project? Common values are
@@ -58,6 +58,10 @@ setup(
     ],
 
     include_package_data=True,
+
+    packages=['easyfs'],
+
+    keywords=['filesystem', 'symlink', 'windows', 'readlink', 'islink'],
 
     install_requires=[
         'six',
