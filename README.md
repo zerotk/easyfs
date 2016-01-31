@@ -1,2 +1,2 @@
-# zerofs
+# easyfs
 File system utilities for python.
