@@ -415,23 +415,23 @@ class Test:
         test_filename = embed_data['testFileContents.data']
 
         # Create a file with a mixture of "\r" and "\n" characters
-        oss = file(test_filename, 'wb')
-        oss.write('Alpha\nBravo\r\nCharlie\rDelta')
+        oss = open(test_filename, 'wb')
+        oss.write(b'Alpha\nBravo\r\nCharlie\rDelta')
         oss.close()
 
         expected = 'Alpha\nBravo\nCharlie\nDelta'
 
         # Use GetFileContents to obtain the file contents, with binary=False and binary=True
         assert GetFileContents(test_filename) == expected
-        assert GetFileContents(test_filename, binary=True) == 'Alpha\nBravo\r\nCharlie\rDelta'
+        assert GetFileContents(test_filename, binary=True) == b'Alpha\nBravo\r\nCharlie\rDelta'
 
 
     def testFileLines(self, embed_data):
         test_filename = embed_data['testFileLines.data']
 
         # Create a file with a mixture of "\r" and "\n" characters
-        oss = file(test_filename, 'wb')
-        oss.write('Alpha\nBravo\r\nCharlie\rDelta')
+        oss = open(test_filename, 'wb')
+        oss.write(b'Alpha\nBravo\r\nCharlie\rDelta')
         oss.close()
 
         expected = ['Alpha', 'Bravo', 'Charlie', 'Delta']
@@ -450,9 +450,9 @@ class Test:
 
     def testCreateFile(self, embed_data):
         contents = 'First\nSecond\r\nThird\rFourth'
-        contents_unix = 'First\nSecond\nThird\nFourth'
-        contents_mac = 'First\rSecond\rThird\rFourth'
-        contents_windows = 'First\r\nSecond\r\nThird\r\nFourth'
+        contents_unix = b'First\nSecond\nThird\nFourth'
+        contents_mac = b'First\rSecond\rThird\rFourth'
+        contents_windows = b'First\r\nSecond\r\nThird\r\nFourth'
 
         target_file = embed_data['mac.txt']
         CreateFile(target_file, contents, eol_style=EOL_STYLE_MAC)
@@ -677,7 +677,7 @@ class Test:
 
     def testCreateTempDirectory(self, embed_data, monkeypatch):
         import random
-        import _easyfs
+        from easyfs import _easyfs
 
         with CreateTemporaryDirectory(prefix='my_prefix', suffix='my_suffix') as first_temp_dir:
             assert isinstance(first_temp_dir, six.text_type)
@@ -1144,13 +1144,16 @@ class Test:
 
     @pytest.mark.parametrize(('env_var',), [('ascii',), ('nót-ãscii',), ('кодирование',)])
     def testExpandUser(self, env_var):
-        fse = sys.getfilesystemencoding()
-        encoded_env_var = env_var.encode(fse)
+        if six.PY2:
+            fse = sys.getfilesystemencoding()
+            encoded_env_var = env_var.encode(fse)
 
-        # Check if `env_var` can be represented with this system's encoding.
-        # This check can fail when trying to encode russian characters in a non-russian windows
-        if encoded_env_var.decode(fse) != env_var:
-            return
+            # Check if `env_var` can be represented with this system's encoding.
+            # This check can fail when trying to encode russian characters in a non-russian windows
+            if encoded_env_var.decode(fse) != env_var:
+                return
+        else:
+            encoded_env_var = env_var
 
         with PushPopItem(os.environ, 'HOME', encoded_env_var):
             assert ExpandUser('~/dir') == env_var + '/dir'

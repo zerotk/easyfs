@@ -1437,11 +1437,11 @@ def DeleteLink(path):
     if sys.platform != 'win32':
         os.unlink(path)
     else:
-        import _easyfs_win32
+        from ._easyfs_win32 import RemoveDirectory as _RemoveDirectory, DeleteFile as _DeleteFile
         if IsDir(path):
-            _easyfs_win32.RemoveDirectory(path)
+            _RemoveDirectory(path)
         else:
-            _easyfs_win32.DeleteFile(path)
+            _DeleteFile(path)
 
 
 
@@ -1788,8 +1788,13 @@ def ExpandUser(path):
     :param path:
         .. seealso:: os.path.expanduser
     '''
-    encoding = sys.getfilesystemencoding()
-    return os.path.expanduser(path.encode(encoding)).decode(encoding)
+    if six.PY2:
+        encoding = sys.getfilesystemencoding()
+        path = path.encode(encoding)
+    result = os.path.expanduser(path)
+    if six.PY2:
+        result = result.decode(encoding)
+    return result
 
 
 
