@@ -25,7 +25,7 @@ class PyTest(TestCommand):
 
 setup(
     name='easyfs',
-    version='0.1.0',
+    version='0.2.0',
 
     author='Alexandre Andrade',
     author_email='kaniabi@gmail.com',
