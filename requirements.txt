@@ -1,2 +1,3 @@
 six
 jaraco.windows
+pytest
