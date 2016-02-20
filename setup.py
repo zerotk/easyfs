@@ -1,31 +1,10 @@
 #!/bin/env python
-from setuptools import find_packages, setup
-from setuptools.command.test import test as TestCommand
-import sys
-
-
-class PyTest(TestCommand):
-
-    user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
-
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        self.pytest_args = []
-
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import pytest
-        errno = pytest.main(['easyfs'] + self.pytest_args)
-        sys.exit(errno)
+from setuptools import setup
 
 
 setup(
-    name='easyfs',
-    version='0.2.0',
+    name='zerotk.easyfs',
+    version='1.0.0',
 
     author='Alexandre Andrade',
     author_email='kaniabi@gmail.com',
@@ -59,18 +38,22 @@ setup(
 
     include_package_data=True,
 
-    packages=['easyfs'],
+    packages=['zerotk', 'zerotk.easyfs'],
+    namespace_packages=['zerotk'],
 
     keywords=['filesystem', 'symlink', 'windows', 'readlink', 'islink'],
 
     install_requires=[
         'six',
         'jaraco.windows',
-        'reraiseit',
+        'zerotk.reraiseit',
+    ],
+    setup_requires=[
+        'setuptools_scm>=1.9',
+        'pytest_runner',
     ],
     tests_require=[
-        'pytest',
         'coverage',
+        'pytest',
     ],
-    cmdclass={'test': PyTest},
 )

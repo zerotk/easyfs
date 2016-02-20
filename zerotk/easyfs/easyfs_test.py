@@ -1,14 +1,14 @@
 # coding: UTF-8
 from __future__ import unicode_literals
+
 import errno
-import pytest
 import subprocess
 import urllib
 
+import pytest
+from zerotk.easyfs import *
 
-from easyfs import *
-from easyfs._exceptions import *
-
+from zerotk.easyfs._exceptions import *
 
 
 #===================================================================================================
@@ -677,7 +677,7 @@ class Test:
 
     def testCreateTempDirectory(self, embed_data, monkeypatch):
         import random
-        from easyfs import _easyfs
+        from zerotk.easyfs import _easyfs
 
         with CreateTemporaryDirectory(prefix='my_prefix', suffix='my_suffix') as first_temp_dir:
             assert isinstance(first_temp_dir, six.text_type)

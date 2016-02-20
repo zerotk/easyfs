@@ -4,7 +4,7 @@ import pytest
 class _EmbedDataFixture(object):
 
     def __init__(self, request):
-        from easyfs import StandardizePath
+        from zerotk.easyfs import StandardizePath
 
         module_name = request.module.__name__.split('.')[-1]
 
@@ -18,11 +18,11 @@ class _EmbedDataFixture(object):
         self._data_dir = StandardizePath(request.fspath.dirname + '/' + data_dir_basename + '-' + request.function.__name__)
 
     def create_data_dir(self):
-        from easyfs import CopyDirectory
+        from zerotk.easyfs import CopyDirectory
         CopyDirectory(self._source_dir, self._data_dir, override=False)
 
     def delete_data_dir(self):
-        from easyfs import IsDir, DeleteDirectory
+        from zerotk.easyfs import IsDir, DeleteDirectory
         if IsDir(self._data_dir):
             DeleteDirectory(self._data_dir)
 
@@ -51,7 +51,7 @@ class _EmbedDataFixture(object):
         @remarks:
             This method triggers the data-directory creation.
         '''
-        from easyfs import StandardizePath
+        from zerotk.easyfs import StandardizePath
 
         result = [self._data_dir] + list(parts)
         result = '/'.join(result)
@@ -85,10 +85,10 @@ class _EmbedDataFixture(object):
             The resulting lines will be used to compare with the contents of expected_fn.
 
         :param bool binary:
-            .. seealso:: easyfs.GetFileContents
+            .. seealso:: zerotk.easyfs.GetFileContents
         '''
         import os
-        from easyfs import GetFileContents, GetFileLines
+        from zerotk.easyfs import GetFileContents, GetFileLines
 
         __tracebackhide__ = True
         import io

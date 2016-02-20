@@ -6,7 +6,7 @@ Some sort of wrapper for common builtin 'os' operations with a nicer interface.
 
 These functions abstract file location, most of them work for either local, ftp or http protocols
 '''
-from reraiseit import reraise
+from zerotk.reraiseit import reraise
 import contextlib
 import io
 import os
