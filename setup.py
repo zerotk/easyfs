@@ -39,7 +39,7 @@ setup(
     include_package_data=True,
 
     packages=['zerotk', 'zerotk.easyfs'],
-    namespace_packages=[''],
+    namespace_packages=['zerotk'],
 
     keywords=['filesystem', 'symlink', 'windows', 'readlink', 'islink'],
 
