@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='zerotk.easyfs',
-    version='1.0.0',
+    use_scm_version=True,
 
     author='Alexandre Andrade',
     author_email='kaniabi@gmail.com',
@@ -39,21 +39,11 @@ setup(
     include_package_data=True,
 
     packages=['zerotk', 'zerotk.easyfs'],
-    namespace_packages=['zerotk'],
+    namespace_packages=[''],
 
-    keywords=['filesystem', 'symlink', 'windows', 'readlink', 'islink'],
+    keywords=['filesystem', 'symlink', 'windows', 'readlink', 'islink']
 
-    install_requires=[
-        'six',
-        'jaraco.windows',
-        'zerotk.reraiseit',
-    ],
-    setup_requires=[
-        'setuptools_scm>=1.9',
-        'pytest_runner',
-    ],
-    tests_require=[
-        'coverage',
-        'pytest',
-    ],
+    install_requires=['six', 'jaraco.windows', 'zerotk.reraiseit'],
+    setup_requires=['setuptools_scm', 'pytest-runner'],
+    tests_require=['coverage', 'pytest'],
 )

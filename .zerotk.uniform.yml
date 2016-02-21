@@ -1,0 +1,19 @@
+name: zerotk.easyfs
+module: zerotk.easyfs
+namespace: zerotk
+path: zerotk/easyfs
+author: Alexandre Andrade
+author_email: kaniabi@gmail.com
+development_status: 5 - Production/Stable
+short_description: File system utilities for python.
+long_description: File system utilities for python.
+keywords:
+  - filesystem
+  - symlink
+  - windows
+  - readlink
+  - islink
+install_requires:
+  - six
+  - jaraco.windows
+  - zerotk.reraiseit

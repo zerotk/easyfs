@@ -2,5 +2,6 @@ six
 jaraco.windows
 zerotk.reraiseit
 
-pytest
+# Development
 coverage
+pytest
