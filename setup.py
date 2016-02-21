@@ -41,7 +41,7 @@ setup(
     packages=['zerotk', 'zerotk.easyfs'],
     namespace_packages=[''],
 
-    keywords=['filesystem', 'symlink', 'windows', 'readlink', 'islink']
+    keywords=['filesystem', 'symlink', 'windows', 'readlink', 'islink'],
 
     install_requires=['six', 'jaraco.windows', 'zerotk.reraiseit'],
     setup_requires=['setuptools_scm', 'pytest-runner'],

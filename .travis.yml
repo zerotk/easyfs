@@ -1,14 +1,14 @@
 language: python
 sudo: false
 python:
-- 2.7
-- 3.5
+  - 2.7
+  - 3.5
 script:
-- pip install coveralls
-- python setup.py develop
-- coverage run setup.py test
+  - pip install coveralls
+  - python setup.py develop
+  - coverage run setup.py test
 after_success:
-- coveralls
+  - coveralls
 deploy:
   provider: pypi
   user: Kaniabi
@@ -16,4 +16,4 @@ deploy:
     tags: true
     repository: zerotk/easyfs
   password:
-    secure: 7jVxJlC0dCgtfgOcfUq+nPCD2HnJLzslRRG+2pJ1noHK6g+kl7Mv/xtttw31JZkwBLC2ZnoG3JQ8WBxuhd1lKZ2zrTB2yvgNjVAxjSLwBqqjPt+raGIc8jD9rXt3lM9umokGUjjaNdtdX5EjNcL0dtIA3+Rt3J5FKhIegzvHwTLNj/GuzPn0eMRhcbb0LtCjE5hsiswdOqPF1TLNAp7n5hqoFhD/RqHZhJzsOh2e8sHN0DfIi/XiR4Hbyj5EXPZv1Hp5pafbeW1gvrL0jvF4Acedi321nspyJYzgfGYZoxWktDkhtIUrr9WD9E3nqa57qK8q1H7CEGmVesJem/rrBBwp1iv9Y416cWTX9vkvibQLwraBX54jjk7HHiTEQDfnYbeMJ+YbLOPmDYmeNKTb0OYlkylGpP3szoopgrKp5RJa+Sk3QKzAwlgQLlZg9s+DNp2c9f0HVxg7VCsIpltXodF978GfXuJoumJX1q7nGfkpObwEaX1uRgGMNq5qYojN6gQ32VMoLWinneoUgok8hTdh30ZmtUcOtYdKBMe+JtgS+rVNAEekHcsk94hFdUFJlUGm3ZlIMeR7s6ZSxL+lTBYNWFF9bNzpVy5CvJ9xze92fUmNMaVzW5DZk8RQbKcxa7PdwwA8xb4cILAIwpfjnwONCbGMh4wpoIeBjNzpCoE=
+    secure: qB6KLeX/cmU9Ba03PXflQ6Gyax1bMmOTQ/7HDGbmaA7gRyKr6q9Vi1cYHIyx/hqw+0j/gvDRfoIy7mkX7kL/5pT7bkWNxLlOKdrBOz/RreJdl1SwDDh2RBpEfPB6oY/DK0iDTgywRDvntMJN++8jJyS+wIUj/uUaZe9JFbUNr6SXswAupyTtX4OgDfHzOoMcGoirNJCn2c3bj2LQzNlXIatLjSQi518xuVYXlccixG+uP0eqs4e59Ds6cur/3dKORdjeuSExoX4FsgBWbU0K4wjtxeFx5IcM27hYjYtaZnJXC50T5ccp/+lckkYnqJcRlG5tvcnGXlrvcj+JkF9pYoB0mh3CSzexBcEC+toL43UtXLfTUzv22i5k2NSyfqGzBQkgh3LHCukyGtaTBVh/Y8wqtBZt490lxdJkUkBuKWVrEWM6nnDH46zsMQ17AsqaHB8G0O//ufSLM13okntFm9VpoJrH/mFrLZd8cmQu2LOZmo0JJlYNTBbVhEoJ58zdNY810vJM5GNna6G4uodK/60gcb5upzUJcB0QgCrskvtW9+LcoteNPvY6th5hJxOgcg9lLb8lgqxPS3lTV/QvVvT6RmjtU2gBgSfMnfSHdxzQnqi2ltyLKUpKR/GN1tWepGYXwWaVRuDlrJ/YOpn7gtZIlrfenHg13yGD27mVk04=
