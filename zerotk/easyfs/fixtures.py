@@ -129,7 +129,7 @@ class _EmbedDataFixture(object):
                 diff = ['FILES DIFFER:', obtained_fn, expected_fn]
                 diff += ['HTML DIFF: %s' % html_fn]
                 diff += difflib.context_diff(obtained_lines, expected_lines)
-                raise AssertionError('\n'.join(diff))
+                raise AssertionError('\n'.join(diff) + '\n')
 
     def _generate_html_diff(self, expected_fn, expected_lines, obtained_fn, obtained_lines):
         """

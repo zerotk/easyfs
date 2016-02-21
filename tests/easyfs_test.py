@@ -7,7 +7,6 @@ import urllib
 
 import pytest
 from zerotk.easyfs import *
-
 from zerotk.easyfs._exceptions import *
 
 
@@ -305,8 +304,6 @@ class Test:
 
 
     def testCopyFiles(self, embed_data):
-        from ._exceptions import DirectoryNotFoundError, NotImplementedProtocol
-
         source_dir = embed_data['files/source']
         target_dir = embed_data['target_dir']
 
@@ -360,8 +357,6 @@ class Test:
 
 
     def TODO__testOpenFile(self, embed_data, monkeypatch):
-        from ._exceptions import DirectoryNotFoundError
-
         test_filename = embed_data['testOpenFile.data']
 
         # Create a file with a mixture of "\r" and "\n" characters
@@ -949,7 +944,7 @@ class Test:
 
 
     def testHandleContents(self):
-        from ._easyfs import _HandleContentsEol
+        from zerotk.easyfs._easyfs import _HandleContentsEol
 
         HandleContents = _HandleContentsEol
         assert 'a\r\nb' == HandleContents('a\nb', EOL_STYLE_WINDOWS)
