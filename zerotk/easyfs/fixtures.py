@@ -18,8 +18,11 @@ class _EmbedDataFixture(object):
         self._data_dir = StandardizePath(request.fspath.dirname + '/' + data_dir_basename + '-' + request.function.__name__)
 
     def create_data_dir(self):
-        from zerotk.easyfs import CopyDirectory
-        CopyDirectory(self._source_dir, self._data_dir, override=False)
+        from zerotk.easyfs import CopyDirectory, IsDir, CreateDirectory
+        if IsDir(self._source_dir):
+            CopyDirectory(self._source_dir, self._data_dir, override=False)
+        else:
+            CreateDirectory(self._data_dir)
 
     def delete_data_dir(self):
         from zerotk.easyfs import IsDir, DeleteDirectory
