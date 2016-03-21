@@ -3,5 +3,6 @@ jaraco.windows
 zerotk.reraiseit
 
 # Development
-coverage
 pytest
+coverage
+

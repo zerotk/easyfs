@@ -17,3 +17,6 @@ install_requires:
   - six
   - jaraco.windows
   - zerotk.reraiseit
+tests_require:
+  - pytest
+  - coverage
